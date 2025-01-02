@@ -12,7 +12,7 @@ function Home() {
     const userid = parseInt(localStorage.getItem("user"));
     try {
       const responce = await axios.get(
-        `http://localhost:5000/user/getuser/${userid}`
+        `${localStorage.getItem("api")}/user/getuser/${userid}`
       );
       setuserdata(responce.data);
     } catch (error) {

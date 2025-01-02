@@ -29,7 +29,7 @@ const Profile = () => {
     const userid = parseInt(localStorage.getItem("user"));
     try {
       const responce = await axios.get(
-        `http://localhost:5000/user/getuser/${userid}`
+        `${localStorage.getItem("api")}/user/getuser/${userid}`
       );
       setuserdata(responce.data);
     } catch (error) {
@@ -78,7 +78,7 @@ const Profile = () => {
         if (result.isConfirmed) {
           try {
             const responce = await axios.put(
-              `http://localhost:5000/user/changepassword/${userid}`,
+              `${localStorage.getItem("api")}/user/changepassword/${userid}`,
               { password: newPassword }
             );
             toast.success("Password changed successfully", toastConfig); // Apply dark theme toast

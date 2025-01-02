@@ -39,10 +39,9 @@ function Login() {
 
   const onSubmitLogin = async (data) => {
     try {
-      const isUser = await axios.post("http://localhost:5000/user/login", data);
+      const isUser = await axios.post(`${localStorage.getItem("api")}/user/login`, data);
       if (isUser.status === 200) {
         localStorage.setItem("user", data.id);
-        localStorage.setItem("api", "hello");
         toast.success("Login Successful", toastConfig);
         navigate("/home");
       }
@@ -55,7 +54,7 @@ function Login() {
   const onSubmitRegister = async (data) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/user/adduser",
+        `${localStorage.getItem("api")}/user/adduser`,
         data
       );
       console.log(response.data);

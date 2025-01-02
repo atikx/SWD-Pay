@@ -12,7 +12,7 @@ function Outlets() {
   const getOutlets = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/user/checkStatus/${localStorage.getItem("user")}`
+        `${localStorage.getItem("api")}/user/checkStatus/${localStorage.getItem("user")}`
       );
       if (res.data == "in-progress") {
         Swal.fire({
@@ -44,7 +44,7 @@ function Outlets() {
     }
     try {
       const responce = await axios.get(
-        "http://localhost:5000/outlet/getoutlets"
+        `${localStorage.getItem("api")}/outlet/getoutlets`
       );
       setoutlets(responce.data);
     } catch (error) {
