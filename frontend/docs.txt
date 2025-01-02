@@ -1,0 +1,7 @@
+const toastConfig = {
+    pauseOnHover: false,
+    theme: "dark",
+    autoClose: 2000,
+  };
+
+
