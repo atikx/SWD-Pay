@@ -8,7 +8,7 @@ import {
   AiOutlineDelete,
 } from "react-icons/ai"; // Import delete icon
 import { FaPlus, FaMinus } from "react-icons/fa"; // Import add and minus icons
-import { ToastContainer, toast } from "react-toastify";
+import {  toast } from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -40,9 +40,14 @@ function SpecificOutlet() {
   }, [cart]);
 
   const toastConfig = {
-    pauseOnHover: false,
-    theme: "dark",
-    autoClose: 2000,
+    duration: 3000,
+    position: "top-right",
+    style: {
+      background: "#191B24", // Dark background
+      color: "#fff", // White text
+      borderRadius: "8px",
+      boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.3)",
+    },
   };
 
   const getOData = async () => {
@@ -108,7 +113,7 @@ function SpecificOutlet() {
 
   const placeOrder = async () => {
     if (cart.length === 0) {
-      toast("Your cart is empty", toastConfig);
+      toast.error("Your cart is empty", toastConfig);
     } else {
       try {
         const oid = Math.round(Math.random() * 10000); // Generate a unique order ID
@@ -126,11 +131,11 @@ function SpecificOutlet() {
         );
 
         if (oplaced.status === 200) {
-          toast(oplaced.data, toastConfig);
+          toast.success(oplaced.data, toastConfig);
           await updateUserOrder(oid); // Pass the same `oid` here as well
         }
       } catch (error) {
-        toast("Order failed", toastConfig);
+        toast.error("Order failed", toastConfig);
         console.error("Order failed:", error);
       }
 
@@ -152,7 +157,7 @@ function SpecificOutlet() {
 
   return (
     <div className="relative w-screen sm:w-auto flex items-center justify-center min-h-screen">
-      <ToastContainer />
+  
 
       {isLoading ? (
         <div className="text-white text-xl">Loading...</div>

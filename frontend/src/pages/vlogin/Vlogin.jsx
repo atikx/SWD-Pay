@@ -3,7 +3,7 @@ import "aos/dist/aos.css"; // Import AOS styles
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import bg from "../../assets/imgs/vloginbg.jpg";
-import { ToastContainer, toast } from "react-toastify";
+import {  toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import AOS from "aos"; // Import AOS
 import axios from "axios";
@@ -26,22 +26,26 @@ function Vlogin() {
   } = useForm();
 
   const toastConfig = {
-    pauseOnHover: false,
-    theme: "dark",
-    autoClose: 2000,
+    duration: 3000,
+    position: "top-right",
+    style: {
+      background: "#191B24", // Dark background
+      color: "#fff", // White text
+      borderRadius: "8px",
+      boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.3)",
+    },
   };
-
   const onSubmit = async (data) => {
     try {
       const isVendor = await axios.post("http://localhost:5000/outlet/login", data);
       if (isVendor.status === 200) {
         localStorage.setItem("vname", data.name);
         navigate("/vendor");
-        toast("Login Successful", toastConfig);
+        toast.success("Login Successful", toastConfig);
       }
     } catch (error) {
       console.error("Error during login:", error);
-      toast(error.response?.data || "Login failed", toastConfig);
+      toast.error(error.response?.data || "Login failed", toastConfig);
     }
   };
 

@@ -2,7 +2,7 @@ import "react-toastify/dist/ReactToastify.css";
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import bg from "../../assets/imgs/loginbg.jpg";
-import { ToastContainer, toast } from "react-toastify";
+import { toast, Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -25,9 +25,14 @@ function Login() {
   } = useForm();
 
   const toastConfig = {
-    pauseOnHover: false,
-    theme: "dark",
-    autoClose: 2000,
+    duration: 3000,
+    position: "top-right",
+    style: {
+      background: "#191B24", // Dark background
+      color: "#fff", // White text
+      borderRadius: "8px",
+      boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.3)",
+    },
   };
 
   const navigate = useNavigate();
@@ -38,12 +43,12 @@ function Login() {
       if (isUser.status === 200) {
         localStorage.setItem("user", data.id);
         localStorage.setItem("api", "hello");
-        toast("Login Successful", toastConfig);
+        toast.success("Login Successful", toastConfig);
         navigate("/home");
       }
     } catch (error) {
       console.error("Error during login:", error);
-      toast(error.response?.data || "Login failed", toastConfig);
+      toast.error(error.response?.data || "Login failed", toastConfig);
     }
   };
 
@@ -54,13 +59,13 @@ function Login() {
         data
       );
       console.log(response.data);
-      toast("Registration Successful", toastConfig);
+      toast.success("Registration Successful", toastConfig);
       setIsRegister(false);
     } catch (error) {
       if (error.response) {
-        toast(error.response.data, toastConfig); // Display specific error
+        toast.error(error.response.data, toastConfig); // Display specific error
       } else {
-        toast("Registration Failed", toastConfig);
+        toast.error("Registration Failed", toastConfig);
       }
     }
   };
@@ -248,7 +253,6 @@ function Login() {
           </p>
         </div>
       </div>
-      <ToastContainer />
     </>
   );
 }

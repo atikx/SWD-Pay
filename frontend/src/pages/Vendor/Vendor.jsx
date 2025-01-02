@@ -3,7 +3,7 @@ import { FaCheckCircle, FaClipboardList } from "react-icons/fa"; // Importing re
 import vendorbg from "../../assets/imgs/vendorbg.jpg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import Swal from "sweetalert2"; // Import SweetAlert2
 import AOS from "aos"; // Import AOS
 import "aos/dist/aos.css"; // AOS styles
@@ -13,9 +13,14 @@ function VendorPage() {
   const navigate = useNavigate();
 
   const toastConfig = {
-    pauseOnHover: false,
-    theme: "dark",
-    autoClose: 2000,
+    duration: 3000,
+    position: "top-right",
+    style: {
+      background: "#191B24", // Dark background
+      color: "#fff", // White text
+      borderRadius: "8px",
+      boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.3)",
+    },
   };
 
   const getOrders = async () => {
@@ -45,9 +50,9 @@ function VendorPage() {
       const res = await axios.patch(
         `http://localhost:5000/user/completeOrder/${user}`
       );
-      toast("order completed", toastConfig);
+      toast.success("order completed", toastConfig);
     } catch (error) {
-      toast("error", toastConfig);
+      toast.error("error", toastConfig);
     }
     // delete from vendor side
     try {

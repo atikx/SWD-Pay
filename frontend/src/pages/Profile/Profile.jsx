@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2"; // Import SweetAlert2
 import { FaUser, FaIdCard, FaMoneyBillAlt, FaKey } from "react-icons/fa"; // Importing React icons
-import { ToastContainer, toast } from "react-toastify";
+import { toast, Toaster } from "react-hot-toast";
+
 import axios from "axios";
 import AOS from "aos"; // Import AOS library
 import "aos/dist/aos.css"; // Import AOS styles
@@ -12,10 +13,16 @@ const Profile = () => {
   const [userdata, setuserdata] = useState({});
   const [newPassword, setNewPassword] = useState("");
 
+  // Dark toast configuration
   const toastConfig = {
-    pauseOnHover: false,
-    theme: "dark",
-    autoClose: 2000,
+    duration: 3000,
+    position: "top-right",
+    style: {
+      background: "#191B24", // Dark background
+      color: "#fff", // White text
+      borderRadius: "8px",
+      boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.3)",
+    }
   };
 
   const getUserData = async () => {
@@ -42,7 +49,7 @@ const Profile = () => {
     AOS.init({
       duration: 500, // Animation duration (in milliseconds) - Increased speed
       once: true, // Run animation only once
-      easing: 'ease-in-out', // Smooth easing
+      easing: "ease-in-out", // Smooth easing
       delay: 100, // Delay before animation starts (for consistent flow)
     });
   }, [navigate]);
@@ -74,14 +81,14 @@ const Profile = () => {
               `http://localhost:5000/user/changepassword/${userid}`,
               { password: newPassword }
             );
-            toast("password changed", toastConfig);
+            toast.success("Password changed successfully", toastConfig); // Apply dark theme toast
           } catch (error) {
-            toast("Error changing password", toastConfig);
+            toast.error("Error changing password", toastConfig); // Apply dark theme toast
           }
         }
       });
     } else {
-      toast("Password cannot be blank", toastConfig);
+      toast.error("Password cannot be blank", toastConfig); // Apply dark theme toast
     }
   };
 
@@ -136,7 +143,9 @@ const Profile = () => {
           </div>
 
           {/* Change Password Section */}
-          <div data-aos="fade-in"> {/* Fade-in animation */}
+          <div data-aos="fade-in">
+            {" "}
+            {/* Fade-in animation */}
             <h3 className="text-xl font-semibold">Change Password:</h3>
             <input
               type="text"
@@ -155,6 +164,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 };
