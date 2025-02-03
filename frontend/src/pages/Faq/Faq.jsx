@@ -20,7 +20,7 @@ const Faq = () => {
   const getQuestions = async () => {
     try {
       const response = await axios.get(
-        `${localStorage.getItem("api")}/question/getquestions`
+        `http://localhost:5000/question/getquestions`
       );
       setQuestions(response.data);
     } catch (error) {
@@ -43,7 +43,7 @@ const Faq = () => {
     if (newQuestion) {
       try {
         const response = await axios.post(
-          `${localStorage.getItem("api")}/question/addquestion`,
+          `http://localhost:5000/question/addquestion`,
           { question: newQuestion, askedby: localStorage.getItem("user") }
         );
         if (response.status === 200) {
@@ -88,7 +88,7 @@ const Faq = () => {
     if (answer) {
       try {
         const response = await axios.put(
-          `${localStorage.getItem("api")}/question/answerquestion/${id}`,
+          `http://localhost:5000/question/answerquestion/${id}`,
           { answer: answer, answeredby: localStorage.getItem("user") }
         );
         if (response.status === 200) {

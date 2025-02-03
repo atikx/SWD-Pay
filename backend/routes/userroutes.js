@@ -37,6 +37,7 @@ router.post("/adduser", async (req, res) => {
 
 // Login Route
 router.post("/login", async (req, res) => {
+  console.log("Login request received");
   const { id, password } = req.body;
 
   try {

@@ -13,7 +13,7 @@ function Deduction() {
   const getUserOrders = async () => {
     try {
       const response = await axios.get(
-        `${localStorage.getItem("api")}/user/getorders/${localStorage.getItem("user")}`
+        `http://localhost:5000/user/getorders/${localStorage.getItem("user")}`
       );
       setOrders(response.data);
     } catch (error) {

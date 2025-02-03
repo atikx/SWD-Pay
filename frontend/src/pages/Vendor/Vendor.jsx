@@ -27,7 +27,7 @@ function VendorPage() {
     try {
       const vname = localStorage.getItem("vname");
       const response = await axios.get(
-        `${localStorage.getItem("api")}/outlet/getorders/${vname}`
+        `http://localhost:5000/outlet/getorders/${vname}`
       );
       setOrders(response.data);
     } catch (error) {
@@ -48,7 +48,7 @@ function VendorPage() {
   const handleComplete = async (user, id) => {
     try {
       const res = await axios.patch(
-        `${localStorage.getItem("api")}/user/completeOrder/${user}`
+        `http://localhost:5000/user/completeOrder/${user}`
       );
       toast.success("order completed", toastConfig);
     } catch (error) {
@@ -57,7 +57,7 @@ function VendorPage() {
     // delete from vendor side
     try {
       const vres = await axios.patch(
-        `${localStorage.getItem("api")}/outlet/completeOrder/${id}`,
+        `http://localhost:5000/outlet/completeOrder/${id}`,
         {
           name: localStorage.getItem("vname"),
         }

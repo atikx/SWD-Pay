@@ -14,7 +14,7 @@ function OrderStatus() {
   const getostatus = async () => {
     try {
       const response = await axios.get(
-        `${localStorage.getItem("api")}/user/getostatus/${localStorage.getItem("user")}`
+        `http://localhost:5000/user/getostatus/${localStorage.getItem("user")}`
       );
       const data = response.data;
 

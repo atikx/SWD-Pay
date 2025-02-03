@@ -19,7 +19,7 @@ import "./App.css";
 function App() {
 
   useEffect(() => {
-    localStorage.setItem("api", "https://swd-clone.vercel.app");
+    // localStorage.setItem("api", "http://loclahost:5000");
   }, []);
 
   return (

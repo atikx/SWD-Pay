@@ -37,7 +37,7 @@ function Vlogin() {
   };
   const onSubmit = async (data) => {
     try {
-      const isVendor = await axios.post(`${localStorage.getItem("api")}/outlet/login`, data);
+      const isVendor = await axios.post(`http://localhost:5000/outlet/login`, data);
       if (isVendor.status === 200) {
         localStorage.setItem("vname", data.name);
         navigate("/vendor");

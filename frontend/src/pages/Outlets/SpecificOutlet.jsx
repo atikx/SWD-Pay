@@ -54,7 +54,7 @@ function SpecificOutlet() {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `${localStorage.getItem("api")}/outlet/getodata/${name}`
+        `http://localhost:5000/outlet/getodata/${name}`
       );
       setOData(response.data);
     } catch (error) {
@@ -100,7 +100,7 @@ function SpecificOutlet() {
   const updateUserOrder = async (oid) => {
     try {
       const user = localStorage.getItem("user");
-      await axios.post(`${localStorage.getItem("api")}/user/neworder/${user}`, {
+      await axios.post(`http://localhost:5000/user/neworder/${user}`, {
         outlet: name,
         oid, // Use the passed-in `oid`
         items: cart,
@@ -121,7 +121,7 @@ function SpecificOutlet() {
 
         // Place the order with the generated ID
         const oplaced = await axios.post(
-          `${localStorage.getItem("api")}/outlet/neworder/${name}`,
+          `http://localhost:5000/outlet/neworder/${name}`,
           {
             oid,
             orderedBy: localStorage.getItem("user"),
